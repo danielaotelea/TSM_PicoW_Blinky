@@ -22,7 +22,7 @@
       "inherits": "default",
       "displayName": "Debug",
       "description": "Debug Configuration",
-      "cacheVariables": 
+      "cacheVariables":
       {
         "CMAKE_BUILD_TYPE": "Debug",
         "ENABLE_UNIT_TESTING": "OFF"
@@ -51,7 +51,7 @@
       }
     }
   ],
-  "buildPresets": 
+  "buildPresets":
   [
     {
       "name": "default",
@@ -94,9 +94,9 @@
       "displayName": "default package preset",
       "configurePreset": "default",
       "generators":
-        [
-          "TGZ"
-        ]
+      [
+        "TGZ"
+      ]
     },
     {
       "name": "releasePackage",
@@ -111,7 +111,7 @@
       "name": "workflow",
       "description": "run test",
       "displayName": "testing",
-      "steps": 
+      "steps":
       [
         {
           "type": "configure",

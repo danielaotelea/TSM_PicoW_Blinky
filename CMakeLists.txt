@@ -24,8 +24,8 @@ endif()
 
 # Required for McuLib, to know the target system
 set(
-  MCULIB_TARGET RP2040 CACHE STRING 
-  "Select McuLib target: MCUXPRESSO, RP2040 or ESP32"
+        MCULIB_TARGET RP2040 CACHE STRING
+        "Select McuLib target: MCUXPRESSO, RP2040 or ESP32"
 )
 
 # turn variable on for verbose output, useful for build debugging. Or run 'ninja --verbose' in the build folder
@@ -38,12 +38,11 @@ set(PICO_BOARD pico_w) # pico or pico_w
 # initialize the SDK based on PICO_SDK_PATH
 # note: this must happen before project()
 # Include build functions from Pico SDK
-#include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
-include(/Users/danielaotelea/Documents/ZHAW/Semester2/SoftEngineering/Clion/Pico/pico-sdk/external/pico_sdk_import.cmake)
+include($ENV{PICO_SDK_PATH}/external/pico_sdk_import.cmake)
 
 # set project name ${CMAKE_PROJECT_NAME}
 project(TSM_PicoW_Blinky
-  C CXX ASM
+        C CXX ASM
 )
 
 # set C and C++ standard to be used
@@ -82,12 +81,12 @@ else()
 endif()
 
 add_executable(${CMAKE_PROJECT_NAME}
- # add additional source files here
+        # add additional source files here
 )
 
 add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
-  COMMAND arm-none-eabi-size "${CMAKE_PROJECT_NAME}.elf"
-  COMMENT "Printing code and data size"
+        COMMAND arm-none-eabi-size "${CMAKE_PROJECT_NAME}.elf"
+        COMMENT "Printing code and data size"
 )
 
 # add component directories to the list
@@ -96,24 +95,11 @@ add_subdirectory(./src                  srcLib)
 # generate extra files (map/bin/hex/uf2)
 pico_add_extra_outputs(${CMAKE_PROJECT_NAME})
 
-#target_link_libraries(
-#  ${CMAKE_PROJECT_NAME}
-#  PRIVATE pico_stdlib
-#  PUBLIC srcLib
-#)
-
-target_link_libraries(${CMAKE_PROJECT_NAME}
-        PRIVATE
-        pico_stdlib
-        rdimon           # Enables libgcov.a + semihosting I/O
-        PUBLIC
-        srcLib
+target_link_libraries(
+        ${CMAKE_PROJECT_NAME}
+        PRIVATE pico_stdlib
+        PUBLIC srcLib
 )
-
-pico_enable_stdio_semihosting(${CMAKE_PROJECT_NAME} 1)
-pico_enable_stdio_usb(${CMAKE_PROJECT_NAME} 0)  # Disable USB conflicts
-
-
 ##################################################################################
 # Unit Test support
 if (ENABLE_UNIT_TESTING)
